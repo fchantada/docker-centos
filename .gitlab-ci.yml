@@ -1,0 +1,11 @@
+build:
+  stage: build Centos
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$CI_AUTH\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context centos --dockerfile centos/Dockerfile --destination fchantada/centos:7
+  only:
+    - centos:7
