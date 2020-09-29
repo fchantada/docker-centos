@@ -6,7 +6,7 @@ centos7:
   script:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$CI_AUTH\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context 7 --dockerfile 7/Dockerfile --destination fchantada/centos:7
+    - /kaniko/executor --context 7 --dockerfile 7/Dockerfile --destination fchantada/centos:7 --destination fchantada/centos:latest
   only:
     refs:
       - master
