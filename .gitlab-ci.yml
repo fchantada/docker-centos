@@ -6,7 +6,21 @@ centos7:
   script:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$CI_AUTH\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context 7 --dockerfile 7/Dockerfile --destination fchantada/centos:7 --destination fchantada/centos:latest
+    - /kaniko/executor --context 7 --dockerfile 7/Dockerfile --destination fchantada/centos:7
+  only:
+    refs:
+      - master
+      - schedules
+
+centos8:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$CI_AUTH\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context 8 --dockerfile 8/Dockerfile --destination fchantada/centos:8 --destination fchantada/centos:latest
   only:
     refs:
       - master
